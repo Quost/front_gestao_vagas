@@ -12,4 +12,9 @@ public class PrimeiraPaginaController {
     public String homeHtml() {
         return "primeiraPagina";
     }
+
+    @GetMapping("/login")
+    public String loginHtml() {
+        return "candidate/login";
+    }
 }
