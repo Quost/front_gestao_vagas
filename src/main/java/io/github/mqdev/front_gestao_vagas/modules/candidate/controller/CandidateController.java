@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,10 +60,12 @@ public class CandidateController {
 
     @GetMapping("/profile")
     @PreAuthorize("hasRole('CANDIDATE')")
-    public String Profile() {
+    public String Profile(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        this.candidateProfileService.getCandidateProfile(auth.getDetails().toString());
+        var candidate = this.candidateProfileService.getCandidateProfile(auth.getDetails().toString());
+
+        model.addAttribute("candidate", candidate);
 
         return "candidate/profile";
     }
