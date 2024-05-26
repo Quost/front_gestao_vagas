@@ -1,4 +1,4 @@
-package io.github.mqdev.front_gestao_vagas.modules.candidate.controller;
+package io.github.mqdev.front_gestao_vagas.modules.candidate.services;
 
 import java.util.UUID;
 
