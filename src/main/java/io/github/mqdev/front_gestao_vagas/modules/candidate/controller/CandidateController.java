@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import io.github.mqdev.front_gestao_vagas.modules.candidate.service.CandidateService;
+import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateLoginService;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,7 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class CandidateController {
 
     @Autowired
-    private CandidateService candidateService;
+    private CandidateLoginService candidateService;
 
     @GetMapping("/login")
     public String login() {
