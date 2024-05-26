@@ -20,7 +20,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 
-
 @Controller
 @RequestMapping("/candidate")
 public class CandidateController {
@@ -40,9 +39,11 @@ public class CandidateController {
     public String signin(RedirectAttributes redirectAttributes, HttpSession session, String username, String password) {
         try {
             var authInfo = candidateLoginService.login(username, password);
-            var roles = authInfo.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase())).toList();
+            var roles = authInfo.getRoles().stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase())).toList();
 
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, password, roles);
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, password,
+                    roles);
             auth.setDetails(authInfo.getAccess_token());
 
             SecurityContextHolder.getContext().setAuthentication(auth);
@@ -57,16 +58,25 @@ public class CandidateController {
         }
     }
 
-
     @GetMapping("/profile")
     @PreAuthorize("hasRole('CANDIDATE')")
-    public String Profile(Model model) {
+    public String profile(Model model) {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            var candidate = this.candidateProfileService.getCandidateProfile(auth.getDetails().toString());
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        var candidate = this.candidateProfileService.getCandidateProfile(auth.getDetails().toString());
+            model.addAttribute("candidate", candidate);
 
-        model.addAttribute("candidate", candidate);
-
-        return "candidate/profile";
+            return "candidate/profile";
+        } catch (Exception e) {
+            return "redirect:/candidate/login";
+        }
     }
+
+    @GetMapping("/jobs")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public String jobs() {
+        return "candidate/jobs";
+    }
+    
 }
