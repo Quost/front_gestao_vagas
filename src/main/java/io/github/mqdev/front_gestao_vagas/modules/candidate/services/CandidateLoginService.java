@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import io.github.mqdev.front_gestao_vagas.modules.candidate.dto.Authentication;
+import io.github.mqdev.front_gestao_vagas.utils.Authentication;
 
 import java.util.HashMap;
 import java.util.Map;

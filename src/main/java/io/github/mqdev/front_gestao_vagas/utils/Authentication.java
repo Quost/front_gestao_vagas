@@ -1,4 +1,4 @@
-package io.github.mqdev.front_gestao_vagas.modules.candidate.dto;
+package io.github.mqdev.front_gestao_vagas.utils;
 
 import java.util.List;
 
