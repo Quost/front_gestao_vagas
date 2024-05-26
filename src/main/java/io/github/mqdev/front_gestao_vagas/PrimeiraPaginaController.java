@@ -22,9 +22,11 @@ public class PrimeiraPaginaController {
     }
 
     @PostMapping("/login")
-    public String loginCandidate(String email, String password) {
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
+    public String loginCandidate(Candidate candidate) {
+        System.out.println("Email: " + candidate.email);
+        System.out.println("Senha: " + candidate.password);
         return "candidate/login";
     }
+
+    record Candidate(String email, String password) {}
 }
