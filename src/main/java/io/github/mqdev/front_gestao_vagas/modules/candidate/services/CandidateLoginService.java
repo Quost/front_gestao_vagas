@@ -1,4 +1,4 @@
-package io.github.mqdev.front_gestao_vagas.modules.candidate.service;
+package io.github.mqdev.front_gestao_vagas.modules.candidate.services;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CandidateService {
+public class CandidateLoginService {
 
     public Authentication login(String username, String password) {
         RestTemplate restTemplate = new RestTemplate();
