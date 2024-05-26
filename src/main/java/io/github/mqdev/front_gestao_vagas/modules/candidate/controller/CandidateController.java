@@ -9,16 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateLoginService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateProfileService;
+import io.github.mqdev.front_gestao_vagas.modules.candidate.services.GetJobsService;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 
 @Controller
 @RequestMapping("/candidate")
@@ -29,6 +30,9 @@ public class CandidateController {
 
     @Autowired
     private CandidateProfileService candidateProfileService;
+
+    @Autowired
+    private GetJobsService getJobsService;
 
     @GetMapping("/login")
     public String login() {
@@ -62,21 +66,34 @@ public class CandidateController {
     @PreAuthorize("hasRole('CANDIDATE')")
     public String profile(Model model) {
         try {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            var candidate = this.candidateProfileService.getCandidateProfile(auth.getDetails().toString());
+            var candidate = this.candidateProfileService.getCandidateProfile(getToken());
 
             model.addAttribute("candidate", candidate);
 
             return "candidate/profile";
-        } catch (Exception e) {
+        } catch (HttpClientErrorException e) {
             return "redirect:/candidate/login";
         }
     }
 
     @GetMapping("/jobs")
     @PreAuthorize("hasRole('CANDIDATE')")
-    public String jobs() {
+    public String jobs(Model model, String filter) {
+        if (filter != null) {
+            try {
+                var jobs = this.getJobsService.getJobs(getToken(), filter);
+                model.addAttribute("jobs", jobs);
+            } catch (HttpClientErrorException e) {
+                return "redirect:/candidate/login";
+            }
+        }
+
         return "candidate/jobs";
     }
-    
+
+    private String getToken() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getDetails().toString();
+    }
+
 }

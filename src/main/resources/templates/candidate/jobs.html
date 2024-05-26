@@ -15,9 +15,7 @@
                     <div class="space-x-4">
                         <a href="/candidate/profile">Profile</a>
                         <a href="/candidate/jobs"  class="bg-gray-900 rounded-md px-3 py-2">Vagas</a>
-
                     </div>
-                   
                 </div>
             </div>
         </nav>
@@ -29,6 +27,17 @@
 
                 <button class="bg-green-600 hover:bg-green-500 text-white w-24 p-3 ml-2 rounded">Buscar</button>
             </form>
+
+            <div class="max-w-md mx-auto mt-10">
+                <div class="grid grid-cols-1 mb-4" th:each="job: ${jobs}">
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                        <h2 class="text-xl font-bold text-gray-100" th:text="${job.title}">Desenvolvedor(a) Java</h2>
+                        <p class="text-gray-400" th:text="'Empresa: ' + ${job.companyId}">Empresa: ACME</p>
+                        <p class="text-gray-400" th:text="'Local: ' + ${job.location}">Local: São Paulo</p>
+                        <p class="text-gray-400" th:text="'Descrição: ' + ${job.description}">Descrição: Desenvolvimento de aplicações Java</p>
+                        <a href="/candidate/apply" class="bg-green-600 rounded-md px-3 py-2 block text-center mt-4">Aplicar</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
