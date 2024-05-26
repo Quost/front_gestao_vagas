@@ -19,7 +19,7 @@ import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateLo
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateProfileService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateSignupService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.GetJobsService;
-
+import io.github.mqdev.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.UUID;
@@ -126,7 +126,7 @@ public class CandidateController {
         try {
             this.candidateSignupService.signup(candidate);
         } catch (HttpClientErrorException e) {
-            model.addAttribute("error", e.getLocalizedMessage());
+            model.addAttribute("error", FormatErrorMessage.format(e.getResponseBodyAsString()));
         }
 
         model.addAttribute("candidate", candidate);
