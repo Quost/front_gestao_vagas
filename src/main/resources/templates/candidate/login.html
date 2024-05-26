@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,10 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form th:action="@{/login}" method="post" th:object="${candidate}">
+    <form method="post"  th:action="@{/login}" th:object="${candidate}">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required>
         <br>

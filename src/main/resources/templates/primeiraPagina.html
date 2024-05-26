@@ -13,8 +13,8 @@
 
     <p>Este é um exemplo de página HTML com Thymeleaf.</p>
 
-    <p>Para saber mais sobre Thymeleaf, acesse o site oficial: <a href="https://www.thymeleaf.org/">https://www.thymeleaf.org/</a></p>
-
     <p th:text="${mensagemDaController}"></p>
+
+    <button type="button" th:onclick="window.location.href='/login'">Ir para a página de login</button>
 </body>
 </html>
