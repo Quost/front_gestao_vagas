@@ -25,7 +25,7 @@ public class PrimeiraPaginaController {
     public String loginCandidate(Candidate candidate) {
         System.out.println("Email: " + candidate.email);
         System.out.println("Senha: " + candidate.password);
-        return "candidate/login";
+        return "redirect:/home";
     }
 
     record Candidate(String email, String password) {}
