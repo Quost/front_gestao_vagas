@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import io.github.mqdev.front_gestao_vagas.modules.candidate.dto.CandidateSignupDTO;
+import io.github.mqdev.front_gestao_vagas.modules.candidate.services.ApplyJobService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateLoginService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateProfileService;
+import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateSignupService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.GetJobsService;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +43,9 @@ public class CandidateController {
 
     @Autowired
     private ApplyJobService applyJobService;
+
+    @Autowired
+    private CandidateSignupService candidateSignupService;
 
     @GetMapping("/login")
     public String login() {
@@ -107,6 +113,24 @@ public class CandidateController {
         } catch (HttpClientErrorException e) {
             return "redirect:/candidate/login";
         }
+    }
+
+    @GetMapping("/signup")
+    public String signup(Model model) {
+        model.addAttribute("candidate", new CandidateSignupDTO());
+        return "candidate/signup";
+    }
+
+    @PostMapping("/signup")
+    public String signup(CandidateSignupDTO candidate, Model model) {
+        try {
+            this.candidateSignupService.signup(candidate);
+        } catch (HttpClientErrorException e) {
+            model.addAttribute("error", e.getLocalizedMessage());
+        }
+
+        model.addAttribute("candidate", candidate);
+        return "candidate/signup";
     }
 
     private String getToken() {
