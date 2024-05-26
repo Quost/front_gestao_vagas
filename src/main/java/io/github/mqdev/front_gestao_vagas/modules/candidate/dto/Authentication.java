@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class Authentication {
-    private String accessToken;
+    private String access_token;
     private List<String> roles;
-    private Long expiresAt;
+    private Long expires_in;
 }
