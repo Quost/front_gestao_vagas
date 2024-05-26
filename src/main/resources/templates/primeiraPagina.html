@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,23 +15,6 @@
 
     <p>Para saber mais sobre Thymeleaf, acesse o site oficial: <a href="https://www.thymeleaf.org/">https://www.thymeleaf.org/</a></p>
 
-    <p>Para saber mais sobre Spring Boot, acesse o site oficial: <a href="https://spring.io/projects/spring-boot">https://spring.io/projects/spring-boot</a></p>
-
-    <p>Para saber mais sobre Spring Framework, acesse o site oficial: <a href="https://spring.io/projects/spring-framework">https://spring.io/projects/spring-framework</a></p>
-
-    <p>Para saber mais sobre Java, acesse o site oficial: <a href="https://www.oracle.com/java/">https://www.oracle.com/java/</a></p>
-
-    <p>Para saber mais sobre HTML, acesse o site oficial: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML">https://developer.mozilla.org/pt-BR/docs/Web/HTML</a></p>
-
-    <p>Para saber mais sobre CSS, acesse o site oficial: <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">https://developer.mozilla.org/pt-BR/docs/Web/CSS</a></p>
-
-    <p>Para saber mais sobre JavaScript, acesse o site oficial: <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript">https://developer.mozilla.org/pt-BR/docs/Web/JavaScript</a></p>
-
-    <p>Para saber mais sobre Bootstrap, acesse o site oficial: <a href="https://getbootstrap.com/">https://getbootstrap.com/</a></p>
-
-    <p>Para saber mais sobre jQuery, acesse o site oficial: <a href="https://jquery.com/">https://jquery.com/</a></p>
-
-    <p>Para saber mais sobre MySQL, acesse o site oficial: <a href="https://www.mysql.com/">https://www.mysql.com/</a></p>
-    
+    <p th:text="${mensagemDaController}"></p>
 </body>
 </html>
