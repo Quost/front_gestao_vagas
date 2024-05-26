@@ -23,7 +23,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class CandidateController {
 
     @Autowired
-    private CandidateLoginService candidateService;
+    private CandidateLoginService candidateLoginService;
+
+
 
     @GetMapping("/login")
     public String login() {
@@ -33,7 +35,7 @@ public class CandidateController {
     @PostMapping("/signin")
     public String signin(RedirectAttributes redirectAttributes, HttpSession session, String username, String password) {
         try {
-            var authInfo = candidateService.login(username, password);
+            var authInfo = candidateLoginService.login(username, password);
             var roles = authInfo.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase())).toList();
 
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, password, roles);
