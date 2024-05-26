@@ -29,14 +29,16 @@
             </form>
 
             <div class="max-w-md mx-auto mt-10">
-                <div class="grid grid-cols-1 mb-4" th:each="job: ${jobs}">
+                <form method="post" th:action="@{/candidate/job/apply}" class="grid grid-cols-1 mb-4" th:each="job: ${jobs}">
                     <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                        <input type="hidden" name="jobId" th:value="${job.id}" />
                         <h2 class="text-xl font-bold text-gray-100" th:text="${job.title}">Desenvolvedor(a) Java</h2>
                         <p class="text-gray-400" th:text="'Empresa: ' + ${job.companyId}">Empresa: ACME</p>
                         <p class="text-gray-400" th:text="'Local: ' + ${job.location}">Local: São Paulo</p>
                         <p class="text-gray-400" th:text="'Descrição: ' + ${job.description}">Descrição: Desenvolvimento de aplicações Java</p>
-                        <a href="/candidate/apply" class="bg-green-600 rounded-md px-3 py-2 block text-center mt-4">Aplicar</a>
-                </div>
+                        <button class="bg-green-600 rounded-md px-3 py-2 block text-center mt-4">Candidatar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </body>

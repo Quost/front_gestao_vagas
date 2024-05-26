@@ -9,13 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateLoginService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.CandidateProfileService;
 import io.github.mqdev.front_gestao_vagas.modules.candidate.services.GetJobsService;
+
 import jakarta.servlet.http.HttpSession;
+
+import java.util.UUID;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -33,6 +37,9 @@ public class CandidateController {
 
     @Autowired
     private GetJobsService getJobsService;
+
+    @Autowired
+    private ApplyJobService applyJobService;
 
     @GetMapping("/login")
     public String login() {
@@ -89,6 +96,17 @@ public class CandidateController {
         }
 
         return "candidate/jobs";
+    }
+
+    @PostMapping("/job/apply")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public String applyJob(@RequestParam UUID jobId) {
+        try {
+            this.applyJobService.applyJob(getToken(), jobId);
+            return "redirect:/candidate/jobs";
+        } catch (HttpClientErrorException e) {
+            return "redirect:/candidate/login";
+        }
     }
 
     private String getToken() {
