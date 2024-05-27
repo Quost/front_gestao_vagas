@@ -1,5 +1,6 @@
 package io.github.mqdev.front_gestao_vagas.modules.candidate.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,11 +17,14 @@ import java.util.Map;
 @Service
 public class CandidateProfileService {
 
+    @Value("@{host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public CandidateProfileDTO getCandidateProfile(String token) {
         
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.82.61.35:8080/candidate/";
+        String url = hostAPIGestaoVagas.concat("/candidate/");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);

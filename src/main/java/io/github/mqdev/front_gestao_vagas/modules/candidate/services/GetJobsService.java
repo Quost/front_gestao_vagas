@@ -1,5 +1,6 @@
 package io.github.mqdev.front_gestao_vagas.modules.candidate.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +21,13 @@ import java.util.List;
 @Service
 public class GetJobsService {
 
+    @Value("@{host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public List<JobDTO> getJobs(String token, String filter) {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.82.61.35:8080/candidate/job";
+        String url = hostAPIGestaoVagas.concat("/candidate/job");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);

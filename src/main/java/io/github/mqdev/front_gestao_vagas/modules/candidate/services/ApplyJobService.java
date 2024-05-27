@@ -2,6 +2,7 @@ package io.github.mqdev.front_gestao_vagas.modules.candidate.services;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,10 +12,13 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ApplyJobService {
 
+    @Value("@{host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public String applyJob(String token, UUID jobId) {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.82.61.35:8080/candidate/job/apply";
+        String url = hostAPIGestaoVagas.concat("/candidate/job/apply");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -3,6 +3,7 @@ package io.github.mqdev.front_gestao_vagas.modules.company.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,10 +15,13 @@ import io.github.mqdev.front_gestao_vagas.utils.Authentication;
 @Service
 public class CompanyLoginService {
 
+    @Value("@{host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public Authentication login(String username, String password) {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.82.61.35:8080/company/auth";
+        String url = hostAPIGestaoVagas.concat("/company/auth");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -1,5 +1,6 @@
 package io.github.mqdev.front_gestao_vagas.modules.candidate.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,10 +15,13 @@ import java.util.Map;
 @Service
 public class CandidateLoginService {
 
+    @Value("@{host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public Authentication login(String username, String password) {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.82.61.35:8080/candidate/auth";
+        String url = hostAPIGestaoVagas.concat("/candidate/auth");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

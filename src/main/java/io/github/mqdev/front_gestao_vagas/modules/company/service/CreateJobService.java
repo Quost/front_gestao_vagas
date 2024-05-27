@@ -1,5 +1,6 @@
 package io.github.mqdev.front_gestao_vagas.modules.company.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,10 +11,14 @@ import io.github.mqdev.front_gestao_vagas.modules.company.dto.CreateJobDTO;
 
 @Service
 public class CreateJobService {
+
+    @Value("@{host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public String createJob(CreateJobDTO job, String token) {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.82.61.35:8080/company/job/";
+        String url = hostAPIGestaoVagas.concat("/company/job/");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
