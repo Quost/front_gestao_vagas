@@ -20,6 +20,7 @@ import io.github.mqdev.front_gestao_vagas.modules.company.dto.CreateJobDTO;
 import io.github.mqdev.front_gestao_vagas.modules.company.service.CompanyLoginService;
 import io.github.mqdev.front_gestao_vagas.modules.company.service.CompanySignupService;
 import io.github.mqdev.front_gestao_vagas.modules.company.service.CreateJobService;
+import io.github.mqdev.front_gestao_vagas.modules.company.service.ListAllCompanyJobsService;
 import io.github.mqdev.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
 
@@ -35,6 +36,9 @@ public class CompanyController {
 
     @Autowired
     private CreateJobService createJobService;
+
+    @Autowired
+    private ListAllCompanyJobsService listAllCompanyJobsService;
 
     @GetMapping("/login")
     public String login() {
@@ -97,7 +101,20 @@ public class CompanyController {
             model.addAttribute("error", FormatErrorMessage.format(e.getResponseBodyAsString()));
         }
         model.addAttribute("jobs", job);
-        return "company/jobs";
+        return "redirect:/company/jobs/list";
+    }
+
+    @GetMapping("/jobs/list")
+    @PreAuthorize("hasRole('COMPANY')")
+    public String listJobs(Model model) {
+        model.addAttribute("jobs", listAllCompanyJobsService.listAllCompanyJobs(getToken()));
+        return "company/list-jobs";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/company/login";
     }
 
     private String getToken() {
