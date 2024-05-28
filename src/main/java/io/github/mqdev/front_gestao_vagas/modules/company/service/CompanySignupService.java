@@ -12,7 +12,7 @@ import io.github.mqdev.front_gestao_vagas.modules.company.dto.CompanySignupDTO;
 @Service
 public class CompanySignupService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
     
     public String signup(CompanySignupDTO companySignupDTO) {

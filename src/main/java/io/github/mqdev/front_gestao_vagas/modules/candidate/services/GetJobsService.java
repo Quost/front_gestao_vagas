@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class GetJobsService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
 
     public List<JobDTO> getJobs(String token, String filter) {

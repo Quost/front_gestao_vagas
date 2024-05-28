@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class CandidateProfileService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
 
     public CandidateProfileDTO getCandidateProfile(String token) {

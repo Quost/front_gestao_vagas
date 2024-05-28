@@ -15,7 +15,7 @@ import io.github.mqdev.front_gestao_vagas.modules.candidate.dto.JobDTO;
 @Service
 public class ListAllCompanyJobsService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
     
     public List<JobDTO> listAllCompanyJobs(String token) {

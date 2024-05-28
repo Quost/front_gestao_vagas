@@ -15,13 +15,16 @@ import java.util.Map;
 @Service
 public class CandidateLoginService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
 
     public Authentication login(String username, String password) {
         RestTemplate restTemplate = new RestTemplate();
 
         String url = hostAPIGestaoVagas.concat("/candidate/auth");
+
+        System.out.println(url);
+        System.out.println(hostAPIGestaoVagas);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

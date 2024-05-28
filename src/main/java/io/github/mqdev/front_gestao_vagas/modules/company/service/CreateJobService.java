@@ -12,7 +12,7 @@ import io.github.mqdev.front_gestao_vagas.modules.company.dto.CreateJobDTO;
 @Service
 public class CreateJobService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
 
     public String createJob(CreateJobDTO job, String token) {

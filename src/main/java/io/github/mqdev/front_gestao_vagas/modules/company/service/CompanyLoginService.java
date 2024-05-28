@@ -15,7 +15,7 @@ import io.github.mqdev.front_gestao_vagas.utils.Authentication;
 @Service
 public class CompanyLoginService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
 
     public Authentication login(String username, String password) {

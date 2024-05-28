@@ -12,7 +12,7 @@ import io.github.mqdev.front_gestao_vagas.modules.candidate.dto.CandidateSignupD
 @Service
 public class CandidateSignupService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
     
     public void signup(CandidateSignupDTO candidateSignupDTO) {

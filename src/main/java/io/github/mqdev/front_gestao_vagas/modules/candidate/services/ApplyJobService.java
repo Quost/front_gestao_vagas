@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ApplyJobService {
 
-    @Value("@{host.api.gestao.vagas}")
+    @Value("${host.api.gestao.vagas}")
     private String hostAPIGestaoVagas;
 
     public String applyJob(String token, UUID jobId) {
